@@ -22,13 +22,18 @@
     <section class="header-section-parent">
       <div class="container">
         <header>
-          <h2>Eatly</h2>
+          <div class="dropping-texts">
+            <h2>Eatly</h2>
+            <h2>Lifestyle</h2>
+            <h2>Sleeping</h2>
+          </div>
 
           <ul>
-            <li>Programs</li>
-            <li>Services</li>
-            <li>News</li>
-            <li>About Us</li>
+            <li><a href="#section1">Programs</a></li>
+            <li><a href="#section2">Services</a></li>
+            <li><a href="#section3">News</a></li>
+            <li><a href="#section4">About Us</a></li>
+            <li><a href="#section5">Testimonials</a></li>
           </ul>
 
           <button>Let's Talk</button>
@@ -38,8 +43,8 @@
           <div class="left">
             <h2>changing your <span>eating</span> habits</h2>
             <p>
-              always take care of your health starting from the food menu that
-              you consume every day
+              first slide always take care of your health starting from the food
+              menu that you consume every day
             </p>
             <div class="watch-video-section">
               <button>explore menu</button>
@@ -59,7 +64,7 @@
     <!--section 2-->
 
     <!-- programs-section -->
-    <section class="programs-section">
+    <section id="section1" class="programs-section">
       <div class="container">
         <div class="programs-section-container">
           <div class="programs-title">
@@ -67,8 +72,14 @@
             <h3>Our best Programs</h3>
           </div>
           <div class="buttons-container">
-            <i class="fa-solid fa-circle-chevron-left fa-2x"></i>
-            <i class="fa-solid fa-circle-chevron-right fa-2x"></i>
+            <i
+              class="fa-solid fa-circle-chevron-left fa-2x"
+              id="prev-button"
+            ></i>
+            <i
+              class="fa-solid fa-circle-chevron-right fa-2x"
+              id="next-button"
+            ></i>
           </div>
         </div>
         <div class="slide">
@@ -79,9 +90,13 @@
               Healthier recipes, from <br />
               food & nutrition experts
             </p>
+            <div class="learn-more-button">
+              <span>learn more </span>
+              <i class="fa-solid fa-play"></i>
+            </div>
           </div>
 
-          <div class="card active">
+          <div class="card">
             <div>
               <i class="fa-solid fa-crown fa-2x"></i>
             </div>
@@ -103,6 +118,10 @@
               Healthier recipes, from <br />
               food & nutrition experts
             </p>
+            <div class="learn-more-button">
+              <span>learn more </span>
+              <i class="fa-solid fa-play"></i>
+            </div>
           </div>
           <div class="card">
             <i class="fa-solid fa-crown fa-2x"></i>
@@ -111,6 +130,10 @@
               Healthier recipes, from <br />
               food & nutrition experts
             </p>
+            <div class="learn-more-button">
+              <span>learn more </span>
+              <i class="fa-solid fa-play"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -118,7 +141,7 @@
     <!--section 3-->
 
     <!-- values -section -->
-    <section class="value-section-container">
+    <section id="section2" class="value-section-container">
       <div class="container">
         <!-- header-section -->
         <section class="value-section">
@@ -179,7 +202,7 @@
     <!--section 4-->
 
     <!--started section-->
-    <section class="started-section">
+    <section id="section3" class="started-section">
       <div class="container">
         <div class="container-started">
           <div><i class="fa-solid fa-crown fa-2x"></i></div>
@@ -198,7 +221,7 @@
 
     <!--menu section-->
 
-    <section class="menu-section">
+    <section id="section4" class="menu-section">
       <div class="container">
         <div class="menu-header">
           <div class="menu-title">
@@ -247,14 +270,14 @@
           </div>
           <div class="right">
             <div class="slide">
-              <div class="card">
+              <div class="card-image">
                 <div class="image-container">
                   <img src="./images//food.png" alt="" />
                 </div>
                 <p>Red onion with copped cabbage</p>
                 <button>Try Now</button>
               </div>
-              <div class="card">
+              <div class="card-image">
                 <div class="image-container">
                   <img src="./images//food.png" alt="" />
                 </div>
@@ -268,7 +291,7 @@
     </section>
     <!--section 6-->
     <!--testimonials about us-->
-    <section class="testimonials-section">
+    <section id="section5" class="testimonials-section">
       <div class="container">
         <div class="left">
           <div class="image-container shadow">
@@ -285,21 +308,11 @@
             that you consume every day
           </p>
 
-          <div class="slide-container">
-            <i class="fa-solid fa-crown fa-2x"></i>
-            <p>
-              always take care of your health starting from the <br />food menu
-              that you consume every day
-            </p>
-
-            <div class="free-lancer-container">
-              <h3>Rara Sanchez</h3>
-              <span>freelancer</span>
-            </div>
-
+          <div class="slide-buttons-container">
+            <div class="slide-container"></div>
             <div class="buttons-slide-container">
-              <i class="fa-solid fa-circle-chevron-left fa-3x"></i>
-              <i class="fa-solid fa-circle-chevron-right fa-3x"></i>
+              <i class="fa-solid fa-circle-chevron-left fa-3x" id="prev"></i>
+              <i class="fa-solid fa-circle-chevron-right fa-3x" id="next"></i>
             </div>
           </div>
         </div>
@@ -352,6 +365,6 @@
         </div>
       </div>
     </footer>
-    <script src="index.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>

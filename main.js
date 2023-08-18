@@ -1,5 +1,5 @@
 // Get all the card elements within the slide
-const cards = document.querySelectorAll(".slide .card");
+const cards = document.querySelectorAll(".programs-section .slide .card");
 
 const slideContainer = document.querySelector(".slide-container");
 const prevSlideButton = document.getElementById("prev");
@@ -55,8 +55,7 @@ rightButton.addEventListener("click", () => {
   if (currentIndex < cards.length - 1) {
     cards[currentIndex].classList.remove("slide-active");
     currentIndex = (currentIndex + 1) % cards.length;
-    console.log(currentIndex);
-    console.log(cards.length);
+
     cards[currentIndex].classList.add("slide-active");
     // Disable the right button when at the end
     updateButtonState();
@@ -123,8 +122,6 @@ prevSlideButton.addEventListener("click", () => {
   }
 });
 
-console.log(slides.length);
-
 nextSlideButton.addEventListener("click", () => {
   if (currentSlideIndex < slides.length - 1) {
     currentSlideIndex = (currentSlideIndex + 1) % slides.length;
@@ -153,39 +150,50 @@ function smoothScroll(e) {
   });
 }
 
-// const sliderContainer = document.querySelector(".slider-container");
-const programsSlides = document.querySelectorAll(".programs-section .slide ");
-const prevButton = document.getElementById("prev-button");
-const nextButton = document.getElementById("next-button");
+/* create slide in menu section */
 
-let currentProgramsSlideIndex = 0;
+const carousel = document.querySelector(".menu-section .right .slide");
+const arrowIcons = document.querySelectorAll(".buttons-container i");
 
-// Function to display the current slide
-const showSlide = (index) => {
-  console.log(index);
-  programsSlides.forEach((slide, i) => {
-    slide.style.transform = `translateX(${(i - index) * 100}%)`;
-  });
+const firsCard = document.querySelectorAll(".card-image")[0];
+let firstCardWidth = firsCard.clientWidth + 20;
+let isDragStart = false,
+  prevPageX,
+  prevScrollLeft;
+
+let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
+const showHideIcons = () => {
+  arrowIcons[0].style.opacity = carousel.scrollLeft < 85 ? 0.5 : 1;
+  arrowIcons[1].style.opacity = carousel.scrollLeft == scrollWidth ? 0.5 : 1;
 };
 
-// Event listeners for previous and next buttons
-prevButton.addEventListener("click", () => {
-  console.log("=======");
-  currentProgramsSlideIndex = Math.max(currentProgramsSlideIndex - 1, 0);
-  console.log(currentProgramsSlideIndex);
-
-  showSlide(currentProgramsSlideIndex);
+arrowIcons.forEach((icon) => {
+  icon.addEventListener("click", () => {
+    carousel.scrollLeft += icon.id == "left" ? -firstCardWidth : firstCardWidth;
+    setTimeout(() => showHideIcons(), 0);
+  });
 });
 
-nextButton.addEventListener("click", () => {
-  currentProgramsSlideIndex = Math.min(
-    currentProgramsSlideIndex + 1,
-    slides.length - 1
-  );
-  console.log(currentProgramsSlideIndex);
+const dragStart = (e) => {
+  isDragStart = true;
+  prevPageX = e.pageX;
+  prevScrollLeft = carousel.scrollLeft;
+};
 
-  showSlide(currentProgramsSlideIndex);
-});
+const dragStop = () => {
+  isDragStart = false;
+  carousel.classList.remove("dragging");
+};
+const dragging = (e) => {
+  if (!isDragStart) return;
 
-// Initialize the slider
-showSlide(currentProgramsSlideIndex);
+  e.preventDefault();
+  carousel.classList.add("dragging");
+  let positionDiff = e.pageX - prevPageX;
+
+  carousel.scrollLeft = prevScrollLeft - positionDiff;
+};
+
+carousel.addEventListener("mousedown", dragStart);
+carousel.addEventListener("mouseup", dragStop);
+carousel.addEventListener("mousemove", dragging);

@@ -278,15 +278,9 @@ button {
   color: var(--white);
 }
 
-.programs-section-container .fa-circle-chevron-left.disabled {
-  opacity: 0.3;
-  /* cursor: none; */
-  pointer-events: none; /* Disable pointer events to make them unclickable */
-}
-
+.programs-section-container .fa-circle-chevron-left.disabled,
 .programs-section-container .fa-circle-chevron-right.disabled {
   opacity: 0.3;
-  /* cursor: none; */
   pointer-events: none; /* Disable pointer events to make them unclickable */
 }
 
@@ -525,6 +519,15 @@ button {
   border-radius: 25px;
   background-color: var(--grey);
   margin: 20px 0;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+.menu-section .left .card:hover {
+  background-color: var(--yellow);
+}
+.menu-section .left .card:hover p {
+  color: var(--white);
 }
 
 .menu-section .left .card .fa-solid {
@@ -547,12 +550,31 @@ button {
 .menu-section .right .slide {
   display: flex;
   gap: 50px;
+  font-size: 0px;
+  cursor: pointer;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  /* white-space: nowrap; */
+
   /* position: relative;
   bottom: -74px; */
+}
+
+.menu-section .right .slide.dragging {
+  cursor: grab;
+  scroll-behavior: auto;
+}
+
+.menu-section .right .slide.dragging .card-image {
+  pointer-events: none;
 }
 .menu-section .right .buttons-container {
   display: flex;
   justify-content: right;
+}
+
+.menu-section .buttons-container i:first-child {
+  opacity: 0.5;
 }
 
 .menu-container .right .card-image {
@@ -566,6 +588,15 @@ button {
   max-width: 300px;
   background-color: var(--light-grey);
   border: 3px solid var(--white);
+  transition: 0.5s ease-in;
+}
+
+.menu-container .right .card-image:hover {
+  background-color: var(--light-magenta);
+}
+
+.menu-container .right .card-image:hover p {
+  color: var(--white);
 }
 
 .menu-container .right .card-image p {
@@ -776,3 +807,7 @@ footer .bottom-right {
   color: var(--dark-magenta);
   font-size: 24px;
 }
+
+/* @media screen and (max-width: 500px) {
+
+} */

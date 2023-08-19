@@ -1,27 +1,20 @@
 // Get all the card elements within the slide
 const cards = document.querySelectorAll(".programs-section .slide .card");
-
 const slideContainer = document.querySelector(".slide-container");
-const prevSlideButton = document.getElementById("prev");
-const nextSlideButton = document.getElementById("next");
 
 // Add event listeners for each card to handle hover effect
 cards.forEach((card) => {
   card.addEventListener("mouseenter", () => {
-    // Remove 'active' class from all cards
     cards.forEach((card) => card.classList.remove("active"));
-    // Add 'active' class to the hovered card
     card.classList.add("active");
   });
 
   card.addEventListener("mouseleave", () => {
-    // Remove 'active' class from all cards when the mouse leaves
     cards.forEach((card) => card.classList.remove("active"));
   });
 });
 
 // Get all the card elements and buttons
-// const cards = document.querySelectorAll(".slide .card");
 const leftButton = document.querySelector(
   ".programs-section-container .fa-circle-chevron-left"
 );
@@ -29,7 +22,6 @@ const rightButton = document.querySelector(
   ".programs-section-container .fa-circle-chevron-right"
 );
 let currentIndex = 0;
-console.log(cards);
 // Show the initial active card
 cards[currentIndex].classList.add("slide-active");
 // Update button state based on currentIndex
@@ -41,31 +33,22 @@ function updateButtonState() {
 // Add event listener for the left button
 leftButton.addEventListener("click", () => {
   if (currentIndex > 0) {
-    console.log(currentIndex);
-
     cards[currentIndex].classList.remove("slide-active");
     currentIndex = (currentIndex - 1 + cards.length) % cards.length;
     cards[currentIndex].classList.add("slide-active");
     leftButton.classList.remove("disabled");
-    updateButtonState(); // Disable the right button when at the end
+    updateButtonState();
   }
 });
 
-console.log(cards.length);
 // Add event listener for the right button
 rightButton.addEventListener("click", () => {
   if (currentIndex < cards.length - 1) {
-    console.log(currentIndex);
     cards[currentIndex].classList.remove("slide-active");
     currentIndex = (currentIndex + 1) % cards.length;
-
     cards[currentIndex].classList.add("slide-active");
-    // Disable the right button when at the end
     updateButtonState();
   }
-
-  // Initialize button state
-  //   updateButtonState();
 });
 updateButtonState();
 
@@ -88,8 +71,9 @@ const slides = [
     author: "ali mahmoud ",
     role: "fullstack",
   },
-  // Add more slides here...
 ];
+const prevSlideButton = document.getElementById("prev");
+const nextSlideButton = document.getElementById("next");
 
 let currentSlideIndex = 0;
 
@@ -195,7 +179,6 @@ const dragStop = () => {
 };
 const dragging = (e) => {
   if (!isDragStart) return;
-
   e.preventDefault();
   carousel.classList.add("dragging");
   let positionDiff = e.pageX - prevPageX;

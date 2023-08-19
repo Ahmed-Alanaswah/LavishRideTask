@@ -29,7 +29,7 @@ const rightButton = document.querySelector(
   ".programs-section-container .fa-circle-chevron-right"
 );
 let currentIndex = 0;
-
+console.log(cards);
 // Show the initial active card
 cards[currentIndex].classList.add("slide-active");
 // Update button state based on currentIndex
@@ -41,18 +41,21 @@ function updateButtonState() {
 // Add event listener for the left button
 leftButton.addEventListener("click", () => {
   if (currentIndex > 0) {
+    console.log(currentIndex);
+
     cards[currentIndex].classList.remove("slide-active");
     currentIndex = (currentIndex - 1 + cards.length) % cards.length;
     cards[currentIndex].classList.add("slide-active");
     leftButton.classList.remove("disabled");
+    updateButtonState(); // Disable the right button when at the end
   }
-  // Disable the right button when at the end
-  updateButtonState();
 });
 
+console.log(cards.length);
 // Add event listener for the right button
 rightButton.addEventListener("click", () => {
   if (currentIndex < cards.length - 1) {
+    console.log(currentIndex);
     cards[currentIndex].classList.remove("slide-active");
     currentIndex = (currentIndex + 1) % cards.length;
 
@@ -62,8 +65,9 @@ rightButton.addEventListener("click", () => {
   }
 
   // Initialize button state
-  updateButtonState();
+  //   updateButtonState();
 });
+updateButtonState();
 
 // Define the slide content
 const slides = [
@@ -107,7 +111,6 @@ function updateSlideContent() {
       <h3>${currentSlide.author}</h3>
       <span>${currentSlide.role}</span>
     </div>
-    
     `;
   slideContainer.innerHTML = slideContent;
 }
@@ -153,26 +156,32 @@ function smoothScroll(e) {
 /* create slide in menu section */
 
 const carousel = document.querySelector(".menu-section .right .slide");
-const arrowIcons = document.querySelectorAll(".buttons-container i");
+const arrowIcons = document.querySelectorAll(
+  ".menu-header .buttons-container i"
+);
 
 const firsCard = document.querySelectorAll(".card-image")[0];
-let firstCardWidth = firsCard.clientWidth + 20;
 let isDragStart = false,
   prevPageX,
   prevScrollLeft;
 
-let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
-const showHideIcons = () => {
-  arrowIcons[0].style.opacity = carousel.scrollLeft < 85 ? 0.5 : 1;
-  arrowIcons[1].style.opacity = carousel.scrollLeft == scrollWidth ? 0.5 : 1;
-};
-
 arrowIcons.forEach((icon) => {
+  let firstCardWidth = firsCard.clientWidth + 20;
+
   icon.addEventListener("click", () => {
     carousel.scrollLeft += icon.id == "left" ? -firstCardWidth : firstCardWidth;
-    setTimeout(() => showHideIcons(), 0);
+    setTimeout(() => showHideIcons(), 60);
   });
 });
+
+const showHideIcons = () => {
+  let scrollWidth = carousel.scrollWidth - carousel.clientWidth; // getting max scrollable width
+  arrowIcons[0].classList.toggle("disabled", carousel.scrollLeft == 0);
+  arrowIcons[1].classList.toggle(
+    "disabled",
+    carousel.scrollLeft == scrollWidth
+  );
+};
 
 const dragStart = (e) => {
   isDragStart = true;
@@ -190,8 +199,8 @@ const dragging = (e) => {
   e.preventDefault();
   carousel.classList.add("dragging");
   let positionDiff = e.pageX - prevPageX;
-
   carousel.scrollLeft = prevScrollLeft - positionDiff;
+  showHideIcons();
 };
 
 carousel.addEventListener("mousedown", dragStart);

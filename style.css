@@ -554,10 +554,6 @@ button {
   cursor: pointer;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  /* white-space: nowrap; */
-
-  /* position: relative;
-  bottom: -74px; */
 }
 
 .menu-section .right .slide.dragging {
@@ -573,8 +569,8 @@ button {
   justify-content: right;
 }
 
-.menu-section .buttons-container i:first-child {
-  opacity: 0.5;
+.menu-header .buttons-container i.disabled {
+  opacity: 0.3;
 }
 
 .menu-container .right .card-image {
